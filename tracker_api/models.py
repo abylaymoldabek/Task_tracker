@@ -27,7 +27,6 @@ class CheckList(models.Model):
 
 
 class ChangeStatus(models.Model):
-    CHOICES = [(1, 'Planning'), (2, 'Active'), (3, 'Control'), (4, 'Finished')]
     task = models.ForeignKey(Task, related_name='status_history', on_delete=models.CASCADE, )
     previous_status = models.SmallIntegerField(choices=CHOICES, default=1)
     current_status = models.SmallIntegerField(choices=CHOICES, default=1)

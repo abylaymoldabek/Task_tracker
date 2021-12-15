@@ -7,3 +7,8 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = '__all__'
+
+        def complete(self, task, new_status):
+            if task.status != new_status:
+                author = User.objects.get(id=self.context.get('request').user.id)
+                ChangeStatus.objects.create(task=task, previous_status=task.status, current_status=new_status, author=author)
