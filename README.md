@@ -1,6 +1,6 @@
 ## Это Таск менеджер проект.
 ## Здесь логика такая, что админ добавляет юзеров. Точнее наблюдателя и кто исполняет.
-## Добавляется через админку - `{localhot}/admin/auth/user/add/`
+## Добавляется через админку - `{localhost}/admin/auth/user/add/`
 ## Login - `{localhost}/login/` добавляет через jwtToken
 ## Если хотите добавить - `{localhost}/api/task/` через пост метод
 ## GET, PUT, PATCH, DELETE эти методы можете использовать по - `{localhost}/api/task/id`
