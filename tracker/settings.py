@@ -12,17 +12,22 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+import environ
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
+env = environ.Env()
+
+environ.Env.read_env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gg$q+uyh$g*(sjw-fvhn$=rkz)$t5k3qiep!ho%40#x#ri20wg'
+SECRET_KEY = env.str('SECRET_KEY', 'asdsd')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG', True)
 
 ALLOWED_HOSTS = []
 
@@ -82,14 +87,7 @@ WSGI_APPLICATION = 'tracker.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_db',
-        'USER': 'abylay',
-        'PASSWORD': 'mypass',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    'default': env.db('DATABASE_URL')
 }
 
 # Password validation
@@ -128,13 +126,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CELERY_BROKER_URL = 'amqp://myuser:mypassword@localhost:5672/myvhost'
+CELERY_BROKER_URL = env.str('CELERY_BROKER_URL', 'amqp://myuser:mypassword@localhost:5672/myvhost')
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "biba4756@gmail.com"
-EMAIL_HOST_PASSWORD = "87758117332biba"
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_BACKEND = env.str('EMAIL_BACKEND', None)
+EMAIL_HOST = env.str('EMAIL_HOST', None)
+EMAIL_PORT = env.str('EMAIL_PORT', None)
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', None)
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', None)
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', None)
+EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', None)
