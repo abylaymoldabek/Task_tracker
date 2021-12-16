@@ -27,7 +27,7 @@ environ.Env.read_env()
 SECRET_KEY = env.str('SECRET_KEY', 'asdsd')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG', True)
+DEBUG = env.bool('DEBUG', True)
 
 ALLOWED_HOSTS = []
 
